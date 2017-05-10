@@ -15,8 +15,13 @@ seen' and not shown again for two days (configurable).
 Installation and usage
 ----------------------
 
-The program requires Python 3, setuptools, pygobject and notmuch.
-It can be installed together with its dependencies using::
+The program requires Python 3, setuptools, pygobject and notmuch. Notmuch isn't
+available on PyPI anymore, so you need to install it separately using either
+your system package manager(available for Ubuntu, Debian, Fedora and other major
+distributions) or directly from sources. It is generally called
+`python3-notmuch`.
+
+It can be installed together with rest of its dependencies using::
 
     pip install .
 
