@@ -15,7 +15,11 @@ LAST_SEEN_FILE = os.path.join(CACHE_DIR, 'last_seen')
 
 
 def exclude_recently_seen(messages):
-    os.makedirs(CACHE_DIR, exist_ok=True)
+    try:
+        os.makedirs(CACHE_DIR)
+    except OSError as e:
+        if e.errno == 17:
+            print('The directory CACHE_DIR exists.')
     recency_interval = int(config.get('recency_interval_hours')) * 60 * 60
     with shelve.open(LAST_SEEN_FILE) as last_seen:
         now = time.time()
@@ -38,7 +42,7 @@ def filter_tags(ts):
 
 def ellipsize(text, length=80):
     if len(text) > length:
-        return text[:length - 1] + '…'
+        return text[:length - 1] + '...'
     else:
         return text
 

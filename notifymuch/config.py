@@ -23,7 +23,11 @@ def load():
     global CONFIG
     CONFIG['notifymuch'] = DEFAULT_CONFIG
     if not CONFIG.read(CONFIG_FILE):
-        os.makedirs(CONFIG_DIR, exist_ok=True)
+        try:
+            os.makedirs(CONFIG_DIR)
+        except OSError as e:
+            if e.errno == 17:
+                print('The directory CONFIG_DIR exists')
         with open(CONFIG_FILE, "w") as f:
             CONFIG.write(f)
 
